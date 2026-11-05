@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f4ef" />
+  <title>You're Invited | Naming Ceremony</title>
+  <style>
+    :root {
+      --paper: #fbf9f5;
+      --ink: #292821;
+      --muted: #777367;
+      --accent: #9b8060;
+      --line: #e8e1d6;
+      --white: #fff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--paper); color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif; line-height: 1.6;
+    }
+    .page { width: min(100% - 32px, 760px); margin: 0 auto; }
+    .hero {
+      min-height: 94vh; display: grid; place-items: center; text-align: center;
+      padding: 64px 18px; position: relative; overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero::before, .hero::after {
+      content: ""; position: absolute; width: 240px; height: 240px;
+      border: 1px solid #d8c9b5; border-radius: 50%; opacity: .55;
+    }
+    .hero::before { top: -150px; left: -110px; }
+    .hero::after { bottom: -160px; right: -100px; }
+    .eyebrow {
+      font: 600 11px/1.4 Arial, sans-serif; letter-spacing: .24em;
+      text-transform: uppercase; color: var(--accent);
+    }
+    h1 { font-size: clamp(42px, 9vw, 72px); line-height: 1.05; font-weight: 400; margin: 18px 0; }
+    .baby { color: var(--accent); font-style: italic; }
+    .intro { max-width: 480px; margin: 0 auto; color: var(--muted); font-size: 17px; }
+    .date-line { margin-top: 28px; font: 600 12px Arial, sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+    .ornament { color: var(--accent); font-size: 24px; margin: 20px 0; }
+    .section { padding: 62px 0; text-align: center; border-bottom: 1px solid var(--line); }
+    h2 { font-size: 32px; font-weight: 400; margin: 8px 0 14px; }
+    .sub { color: var(--muted); max-width: 520px; margin: 0 auto 26px; }
+    .details { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 520px; margin: 28px auto; }
+    .detail { background: var(--white); border: 1px solid var(--line); padding: 22px 12px; }
+    .detail strong { display: block; font: 600 10px Arial, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .detail span { font-size: 17px; }
+    .countdown { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin: 26px 0 0; }
+    .count { min-width: 76px; padding: 14px 10px; background: white; border: 1px solid var(--line); }
+    .count b { display: block; font-size: 26px; font-weight: 400; }
+    .count small { font: 10px Arial, sans-serif; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; }
+    .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+    .btn {
+      display: inline-block; border: 1px solid var(--accent); padding: 12px 20px;
+      color: var(--ink); text-decoration: none; font: 600 11px Arial, sans-serif;
+      letter-spacing: .1em; text-transform: uppercase; cursor: pointer; background: transparent;
+    }
+    .btn.primary { background: var(--accent); color: white; }
+    .music-note { font: 12px Arial, sans-serif; color: var(--muted); margin-top: 14px; }
+    footer { padding: 34px 0 48px; text-align: center; color: var(--muted); font-size: 13px; }
+    @media (max-width: 520px) {
+      .details { grid-template-columns: 1fr; max-width: 320px; }
+      .hero { min-height: 88vh; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <div class="eyebrow">With love and blessings</div>
+      <div class="ornament">✦</div>
+      <p class="intro">Together with our families, we invite you to celebrate a very special day as we introduce our little one to the world.</p>
+      <h1>The Naming<br />Ceremony of<br /><span class="baby" id="babyName">Our Little One</span></h1>
+      <div class="date-line" id="heroDate">Sunday · Date to be announced</div>
+      <div class="ornament">❧</div>
+      <a class="btn primary" href="#details">View invitation</a>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="section">
+      <div class="eyebrow">A new name, a lifetime of love</div>
+      <h2>Please join us</h2>
+      <p class="sub" id="message">Your presence and blessings will make this occasion even more meaningful. We look forward to celebrating with you.</p>
+      <div class="eyebrow">The proud parents</div>
+      <h2 id="parents">Parent 1 &amp; Parent 2</h2>
+    </section>
+
+    <section class="section" id="details">
+      <div class="eyebrow">Save the date</div>
+      <h2>Celebration details</h2>
+      <div class="details">
+        <div class="detail"><strong>Date</strong><span id="eventDate">Add event date</span></div>
+        <div class="detail"><strong>Time</strong><span id="eventTime">Add event time</span></div>
+        <div class="detail"><strong>Venue</strong><span id="venue">Add venue name</span></div>
+        <div class="detail"><strong>Address</strong><span id="address">Add full address</span></div>
+      </div>
+      <div class="eyebrow">Counting down to the special day</div>
+      <div class="countdown" aria-live="polite">
+        <div class="count"><b id="days">--</b><small>Days</small></div>
+        <div class="count"><b id="hours">--</b><small>Hours</small></div>
+        <div class="count"><b id="minutes">--</b><small>Minutes</small></div>
+        <div class="count"><b id="seconds">--</b><small>Seconds</small></div>
+      </div>
+      <div class="actions">
+        <a class="btn" id="mapLink" href="#" target="_blank" rel="noopener">Open Google Maps</a>
+        <button class="btn primary" id="shareBtn" type="button">Share on WhatsApp</button>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="eyebrow">A little note</div>
+      <h2>Your blessings are our greatest gift</h2>
+      <p class="sub">We can't wait to share this beautiful milestone with you. Thank you for being part of our happiness.</p>
+      <button class="btn" id="musicBtn" type="button">Play background music ♫</button>
+      <p class="music-note">Music starts only when you tap the button.</p>
+      <audio id="bgMusic" loop></audio>
+    </section>
+  </main>
+
+  <footer>
+    Made with love · We look forward to celebrating with you
+  </footer>
+
+  <script>
+    // EDIT THESE DETAILS to personalise your invitation.
+    const INVITATION = {
+      babyName: "Our Little One",
+      parentNames: "Parent 1 & Parent 2",
+      dateTime: "2027-01-17T10:30:00+05:30", // YYYY-MM-DDTHH:MM:SS+05:30
+      dateLabel: "Sunday, 17 January 2027",
+      timeLabel: "10:30 AM onwards",
+      venueName: "Your venue name",
+      fullAddress: "Your full venue address, Bengaluru",
+      mapsQuery: "Your venue name, Bengaluru",
+      message: "Your presence and blessings will make this occasion even more meaningful. We look forward to celebrating with you.",
+      musicFile: "music.mp3" // Put an audio file named music.mp3 beside this HTML file.
+    };
+
+    document.title = `Naming Ceremony | ${INVITATION.babyName}`;
+    document.getElementById("babyName").textContent = INVITATION.babyName;
+    document.getElementById("parents").textContent = INVITATION.parentNames;
+    document.getElementById("heroDate").textContent = INVITATION.dateLabel;
+    document.getElementById("eventDate").textContent = INVITATION.dateLabel;
+    document.getElementById("eventTime").textContent = INVITATION.timeLabel;
+    document.getElementById("venue").textContent = INVITATION.venueName;
+    document.getElementById("address").textContent = INVITATION.fullAddress;
+    document.getElementById("message").textContent = INVITATION.message;
+
+    const mapUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(INVITATION.mapsQuery);
+    document.getElementById("mapLink").href = mapUrl;
+
+    const eventTime = new Date(INVITATION.dateTime).getTime();
+    function updateCountdown() {
+      const remaining = eventTime - Date.now();
+      if (!Number.isFinite(eventTime)) return;
+      if (remaining <= 0) {
+        ["days", "hours", "minutes", "seconds"].forEach(id => document.getElementById(id).textContent = "0");
+        return;
+      }
+      const values = {
+        days: Math.floor(remaining / 86400000),
+        hours: Math.floor((remaining % 86400000) / 3600000),
+        minutes: Math.floor((remaining % 3600000) / 60000),
+        seconds: Math.floor((remaining % 60000) / 1000)
+      };
+      Object.entries(values).forEach(([id, value]) => document.getElementById(id).textContent = value);
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    const shareText = `You're invited to our little one's naming ceremony!\n\nDate: ${INVITATION.dateLabel}\nTime: ${INVITATION.timeLabel}\nVenue: ${INVITATION.venueName}\nAddress: ${INVITATION.fullAddress}\n\nLocation: ${mapUrl}\n\nWe look forward to celebrating with you!`;
+    document.getElementById("shareBtn").addEventListener("click", () => {
+      const url = "https://wa.me/?text=" + encodeURIComponent(shareText + "\n\nInvitation website: " + window.location.href);
+      window.open(url, "_blank", "noopener");
+    });
+
+    const audio = document.getElementById("bgMusic");
+    audio.src = INVITATION.musicFile;
+    document.getElementById("musicBtn").addEventListener("click", async (event) => {
+      try {
+        if (audio.paused) {
+          await audio.play();
+          event.currentTarget.textContent = "Pause background music ♫";
+        } else {
+          audio.pause();
+          event.currentTarget.textContent = "Play background music ♫";
+        }
+      } catch {
+        alert("Add your music.mp3 file beside index.html, then try again.");
+      }
+    });
+  </script>
+</body>
+</html>
